@@ -1,12 +1,11 @@
 package com.example.contactosv2;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.example.contactosv2.adapters.UsuarioAdapter;
 import com.example.contactosv2.models.UsuarioModel;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -23,7 +22,8 @@ public class MainActivity extends AppCompatActivity {
     private Button btn_main_ingresar,btn_main_registrarse;
     private UsuarioAdapter adapter;
     private UsuarioModel model;
-
+    /*se define la variable para el SharedPreferences. Esto es para obtener de la base datos informaciòn de los registros realizados*/
+    private SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,36 +34,43 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         init(); /*se llama la función init*/
 
-        /*inicialización del adaptador y el modelo*/
-        adapter= new UsuarioAdapter(getApplicationContext());
-        model=new UsuarioModel();
-
         /*Se captura el texto en usario y contraseña, se aplica la funciòn validar campos*/
         btn_main_ingresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String usuario=et_main_usuario.getText().toString();
                 String contrasena=et_main_contrasena.getText().toString();
-                boolean validacionInterfaz=validarCampos(usuario,contrasena);
 
+                boolean validacionInterfaz=validarCampos(usuario,contrasena);
                 /*si la validación es favorable, se continua con el login, se saca el mensaje y se lleva al usuario  a contactos con el intent*/
-                if(validacionInterfaz==true){
+                if(validacionInterfaz){
                     adapter.openRead();
                     model=adapter.login(usuario,contrasena);
                     adapter.close();
-                }
-                if(model == null){
+
+                    if(model == null){
                     Toast.makeText(MainActivity.this, "Usuario no encontrado, revise su información", Toast.LENGTH_LONG).show();
 
-                }else{
+                    }else{
 
                     Toast.makeText(MainActivity.this, "Usuario encontrado, iniciando sesión", Toast.LENGTH_LONG).show();
+                    SharedPreferences.Editor editor=preferences.edit();
+                    /*se obtiene id y nombre de registros en la BD*/
+                    editor.putInt("usuario_id",model.get_id());
+                    editor.putString("usuario_nombre",model.get_nombre());
+                    /*no se cierra el sharedpreference hasta que no graba*/
+                    editor.commit();
+
                     Intent contactos=new Intent(MainActivity.this,ContactosActivity.class);
                     /* el flag es para crear un flujo de trabajo diferente, tal que si el usuario se devuelve en la aplicación se sale de la misma*/
                     contactos.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(contactos);
 
+                    }
+
                 }
+
             }
         });
 
@@ -71,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Intent es para desplazarse por formularios
-                Intent registro=new Intent(MainActivity.this, RegistroPersonaActivity.class);
+                Intent registro=new Intent(MainActivity.this, RegistroUsuarioActivity.class);
                 startActivity(registro);
             }
         });
@@ -84,15 +91,22 @@ public class MainActivity extends AppCompatActivity {
         et_main_contrasena=findViewById(R.id.et_main_contrasena);
         btn_main_ingresar=findViewById(R.id.btn_main_ingresar);
         btn_main_registrarse=findViewById(R.id.btn_main_registrarse);
+
+        /*inicialización del adaptador y el modelo*/
+        adapter= new UsuarioAdapter(getApplicationContext());
+        model=new UsuarioModel();
+
+        /*Se inicializa el sharepreference. Es para obtener información de registros en la base de datos*/
+        preferences=getSharedPreferences("Preferences",MODE_PRIVATE);
     }
 
  /*Función para validar los campos de usuario y contraseña*/
     public boolean validarCampos(String usuario, String contrasena) {
         if (usuario.isEmpty() || contrasena.isEmpty()) {
-            Toast.makeText(this, "Por favor ingrese usuario y contraseña", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Campo vacío, por favor ingrese usuario y contraseña", Toast.LENGTH_LONG).show();
             return false;
-        } else if (usuario.length() < 8 || contrasena.length() < 8) {
-            Toast.makeText(this, "Por favor ingrese usuario y contraseña validos. Mínimo 8 carácteres.", Toast.LENGTH_LONG).show();
+        } else if (usuario.length() < 3 || contrasena.length() < 8) {
+            Toast.makeText(this, "Por favor ingrese usuario y contraseña validos. Mínimo 3 carácteres para el usuario y 8 para contraseña.", Toast.LENGTH_LONG).show();
             return false;
         } else{
             return true;

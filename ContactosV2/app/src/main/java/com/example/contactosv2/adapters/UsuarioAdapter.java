@@ -1,5 +1,6 @@
 package com.example.contactosv2.adapters;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -63,5 +64,14 @@ public class UsuarioAdapter {
             model.set_contrasena(cursor.getString(cursor.getColumnIndex("contrasena")));
             return model;
         }
+    }
+
+    /*Función para insertar en la base de datos*/
+    public long  insert(UsuarioModel model){
+        ContentValues values=new ContentValues();
+        values.put("nombre",model.get_nombre());
+        values.put("usuario",model.get_usuario());
+        values.put("contrasena",model.get_contrasena());
+        return database.insert(NOMBRE_TABLA,null,values);
     }
 }

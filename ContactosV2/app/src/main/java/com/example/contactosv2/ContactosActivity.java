@@ -1,5 +1,6 @@
 package com.example.contactosv2;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -9,8 +10,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
+import android.widget.TextView;
 
 public class ContactosActivity extends AppCompatActivity {
+    private TextView textView;
+    private SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,15 +22,13 @@ public class ContactosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_contactos);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        init();
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+    }
+
+    public void init(){
+        textView=findViewById(R.id.textView);
+        preferences=getSharedPreferences("Preferences", MODE_PRIVATE);
     }
 
 }

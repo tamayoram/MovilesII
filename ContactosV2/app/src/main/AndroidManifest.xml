@@ -14,7 +14,7 @@
             android:label="@string/title_activity_contactos"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".RegistroPersonaActivity"
+            android:name=".RegistroUsuarioActivity"
             android:label="@string/title_activity_registro_persona"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
