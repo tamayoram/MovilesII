@@ -11,4 +11,5 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="titulo_inicio_de_sesion">Inicio de sesión</string>
     <string name="title_activity_registro_persona">RegistroPersonaActivity</string>
+    <string name="title_activity_contactos">ContactosActivity</string>
 </resources>

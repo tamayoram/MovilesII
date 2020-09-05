@@ -3,6 +3,8 @@ package com.example.contactosv2;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.contactosv2.adapters.UsuarioAdapter;
+import com.example.contactosv2.models.UsuarioModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -19,6 +21,8 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
     private EditText et_main_usuario,et_main_contrasena;
     private Button btn_main_ingresar,btn_main_registrarse;
+    private UsuarioAdapter adapter;
+    private UsuarioModel model;
 
 
     @Override
@@ -30,6 +34,10 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         init(); /*se llama la función init*/
 
+        /*inicialización del adaptador y el modelo*/
+        adapter= new UsuarioAdapter(getApplicationContext());
+        model=new UsuarioModel();
+
         /*Se captura el texto en usario y contraseña, se aplica la funciòn validar campos*/
         btn_main_ingresar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,8 +45,24 @@ public class MainActivity extends AppCompatActivity {
                 String usuario=et_main_usuario.getText().toString();
                 String contrasena=et_main_contrasena.getText().toString();
                 boolean validacionInterfaz=validarCampos(usuario,contrasena);
-                if(validacionInterfaz){
-                    //Inicio de sesión con BD
+
+                /*si la validación es favorable, se continua con el login, se saca el mensaje y se lleva al usuario  a contactos con el intent*/
+                if(validacionInterfaz==true){
+                    adapter.openRead();
+                    model=adapter.login(usuario,contrasena);
+                    adapter.close();
+                }
+                if(model == null){
+                    Toast.makeText(MainActivity.this, "Usuario no encontrado, revise su información", Toast.LENGTH_LONG).show();
+
+                }else{
+
+                    Toast.makeText(MainActivity.this, "Usuario encontrado, iniciando sesión", Toast.LENGTH_LONG).show();
+                    Intent contactos=new Intent(MainActivity.this,ContactosActivity.class);
+                    /* el flag es para crear un flujo de trabajo diferente, tal que si el usuario se devuelve en la aplicación se sale de la misma*/
+                    contactos.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(contactos);
+
                 }
             }
         });
