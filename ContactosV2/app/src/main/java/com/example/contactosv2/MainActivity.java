@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         init(); /*se llama la función init*/
+        validarSesion();/*se llama la función sesión. El sistema valida si hay preference y si es así se va a contactos*/
 
         /*Se captura el texto en usario y contraseña, se aplica la funciòn validar campos*/
         btn_main_ingresar.setOnClickListener(new View.OnClickListener() {
@@ -62,10 +63,7 @@ public class MainActivity extends AppCompatActivity {
                     /*no se cierra el sharedpreference hasta que no graba*/
                     editor.commit();
 
-                    Intent contactos=new Intent(MainActivity.this,ContactosActivity.class);
-                    /* el flag es para crear un flujo de trabajo diferente, tal que si el usuario se devuelve en la aplicación se sale de la misma*/
-                    contactos.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(contactos);
+                    irContactos();
 
                     }
 
@@ -100,6 +98,25 @@ public class MainActivity extends AppCompatActivity {
         preferences=getSharedPreferences("Preferences",MODE_PRIVATE);
     }
 
+    /*Función para validar el cierre de la sesión*/
+
+    private  void validarSesion(){
+        int usuario_id=preferences.getInt("usuario_id",0);
+        String usuario_nombre=preferences.getString("usuario_nombre",null);
+
+        if (usuario_id >0 && usuario_nombre!=null){
+            irContactos();
+        }
+
+    }
+
+    private void irContactos(){
+        Intent contactos=new Intent(MainActivity.this,ContactosActivity.class);
+        /* el flag es para crear un flujo de trabajo diferente, tal que si el usuario se devuelve en la aplicación se sale de la misma*/
+        contactos.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(contactos);
+    }
+
  /*Función para validar los campos de usuario y contraseña*/
     public boolean validarCampos(String usuario, String contrasena) {
         if (usuario.isEmpty() || contrasena.isEmpty()) {
@@ -113,25 +130,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

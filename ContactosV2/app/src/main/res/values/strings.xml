@@ -13,4 +13,8 @@
     <string name="title_activity_registro_persona">RegistroPersonaActivity</string>
     <string name="title_activity_contactos">ContactosActivity</string>
     <string name="titulo_registrou">Registrarse</string>
+    <string name="action_salir">Salir</string>
+    <string name="action_cerrar_sesion">Cerrar sesión</string>
+    <string name="title_activity_registro_contacto">RegistroContactoActivity</string>
+    <string name="titulo_registroc">Nuevo contacto</string>
 </resources>

@@ -12,7 +12,7 @@ public class UsuarioAdapter {
 
     /*Creación de la base de datos y la tabla usuario*/
     private final String NOMBRE_DB="contactosv2.db";
-    private final int VERSION=1;
+    private final int VERSION=2;
     public static final String NOMBRE_TABLA="usuario";
 
     public static final String SCRIPT_NUEVA_TABLA="CREATE TABLE "+ NOMBRE_TABLA +

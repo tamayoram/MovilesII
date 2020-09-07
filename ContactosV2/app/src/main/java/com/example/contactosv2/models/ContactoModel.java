@@ -8,23 +8,26 @@ public class ContactoModel implements Serializable {
     private String _apellido;
     private String _celular;
     private String _fijo;
+    private int _usuario_id;
 
     public ContactoModel() {
     }
 
-    public ContactoModel(String _nombre, String _apellido, String _celular, String _fijo) {
+    public ContactoModel(String _nombre, String _apellido, String _celular, String _fijo, int _usuario_id) {
         this._nombre = _nombre;
         this._apellido = _apellido;
         this._celular = _celular;
         this._fijo = _fijo;
+        this._usuario_id=_usuario_id;
     }
 
-    public ContactoModel(int _id, String _nombre, String _apellido, String _celular, String _fijo) {
+    public ContactoModel(int _id, String _nombre, String _apellido, String _celular, String _fijo, int _usuario_id) {
         this._id = _id;
         this._nombre = _nombre;
         this._apellido = _apellido;
         this._celular = _celular;
         this._fijo = _fijo;
+        this._usuario_id=_usuario_id;
     }
 
     public int get_id() {
@@ -65,5 +68,14 @@ public class ContactoModel implements Serializable {
 
     public void set_fijo(String _fijo) {
         this._fijo = _fijo;
+    }
+
+
+    public int get_usuario_id() {
+        return _usuario_id;
+    }
+
+    public void set_usuario_id(int _usuario_id) {
+        this._usuario_id = _usuario_id;
     }
 }
