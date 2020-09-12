@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import com.example.contactosv2.adapters.ContactoAdapter;
+import com.example.contactosv2.models.ContactoModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -13,12 +15,19 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class ContactosActivity extends AppCompatActivity {
-    private TextView textView;
+
     private FloatingActionButton fab_contactos_nuevo;
     private SharedPreferences preferences;
+    private ContactoModel model;
+    private ArrayList<ContactoModel> list;
+    private ContactoAdapter adapter;
+    private ListView lv_contactos_lista;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +41,13 @@ public class ContactosActivity extends AppCompatActivity {
         String usuario_nombre=preferences.getString("usuario_nombre",null);
 
         if (usuario_id >0 && usuario_nombre!=null){
-            textView.setText(usuario_nombre);
+            adapter.openRead();
+            list=adapter.selectContactosByUsuarioId(usuario_id);
+            adapter.close();
+            if(list!=null){
+                lv_contactos_lista.setAdapter(new ContactoAdapter(this,list));
+            }
+
         }
 
         fab_contactos_nuevo.setOnClickListener(new View.OnClickListener() {
@@ -46,8 +61,11 @@ public class ContactosActivity extends AppCompatActivity {
 
     /*función para detectar el objeto xml y activar las preferencias*/
     public void init(){
-        textView=findViewById(R.id.textView);
+        lv_contactos_lista=findViewById(R.id.lv_contactos_lista);
         fab_contactos_nuevo=findViewById(R.id.fab_contactos_nuevo);
+        list=new ArrayList<>();
+        model=new ContactoModel();
+        adapter=new ContactoAdapter(getApplicationContext());
         preferences=getSharedPreferences("Preferences", MODE_PRIVATE);
     }
 

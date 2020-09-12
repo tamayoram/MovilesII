@@ -4,14 +4,20 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.TextView;
 
+import com.example.contactosv2.R;
 import com.example.contactosv2.database.SQLiteHelper;
 import com.example.contactosv2.models.ContactoModel;
 
 import java.util.ArrayList;
 
 
-public class ContactoAdapter {
+public class ContactoAdapter extends BaseAdapter {
     /*Creación de la base de datos y la tabla usuario*/
     private final String NOMBRE_DB="contactosv2.db";
     private final int VERSION=2;
@@ -37,6 +43,11 @@ public class ContactoAdapter {
     public ContactoAdapter(Context context) {
         this.context = context;
         helper=new SQLiteHelper(context,NOMBRE_DB,null,VERSION);
+    }
+
+    public ContactoAdapter(Context context, ArrayList<ContactoModel> list) {
+        this.context = context;
+        this.list = list;
     }
 
     /*Apertura de la base de datos para leerla*/
@@ -123,5 +134,38 @@ public class ContactoAdapter {
         String idtext=String.valueOf(id);
 
         return database.delete(NOMBRE_TABLA,where,new String[]{idtext});
+    }
+
+    @Override
+    public int getCount() {
+        return list.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return list.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return 0;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        View viewItemContacto=convertView;
+        if(convertView==null){
+            LayoutInflater inflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            viewItemContacto=inflater.inflate(R.layout.item_contacto,parent,false);
+        }
+        model= (ContactoModel) getItem(position);
+        String nombre_completo=model.get_nombre()+" "+model.get_apellido();
+        TextView iv_item_contacto_nombre_completo,iv_item_contacto_celular;
+        iv_item_contacto_nombre_completo=viewItemContacto.findViewById(R.id.iv_item_contacto_nombre_completo);
+        iv_item_contacto_celular=viewItemContacto.findViewById(R.id.iv_item_contacto_celular);
+
+        iv_item_contacto_nombre_completo.setText(nombre_completo);
+        iv_item_contacto_celular.setText(model.get_celular());
+        return viewItemContacto;
     }
 }

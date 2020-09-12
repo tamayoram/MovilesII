@@ -17,4 +17,6 @@
     <string name="action_cerrar_sesion">Cerrar sesión</string>
     <string name="title_activity_registro_contacto">RegistroContactoActivity</string>
     <string name="titulo_registroc">Nuevo contacto</string>
+    <string name="title_activity_detalle_contacto">DetalleContactoActivity</string>
+    <string name="titulo_detallec">Detalle contacto</string>
 </resources>
