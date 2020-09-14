@@ -119,4 +119,13 @@ public class NotaOperations {
         return (int) id;
 
     }
+
+    public int delete(int id){
+        String where="id=?";
+        String idtext=String.valueOf(id);
+        openWrite();
+        long del=database.delete("nota",where,new String[]{idtext});
+        close();
+        return(int) del;
+    }
 }

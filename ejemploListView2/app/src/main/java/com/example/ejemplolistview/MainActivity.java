@@ -91,6 +91,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btn_eliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int id=Integer.parseInt(edt_id.getText().toString());
+                int validardelete= operations.delete(id);
+                if(validardelete>0){
+                    Toast.makeText(MainActivity.this,"Eliminado correctamente",Toast.LENGTH_LONG).show();
+
+                }else{
+                    Toast.makeText(MainActivity.this,"No se ha eliminado la información",Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
+
     }
 
 
