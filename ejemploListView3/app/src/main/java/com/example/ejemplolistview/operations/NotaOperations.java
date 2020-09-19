@@ -1,11 +1,12 @@
 package com.example.ejemplolistview.operations;
 
+// En esta clase se definen las operaciones que se van a realizar con la base de datos (insertar, listar, modificar y eliminar).
 //Importante: siempre se debe definir el contexto, abrir la base de datos y cerrar la base de datos.
-// Para consultar la abro con Read, si voy actualizar, insertar o eliminar la abro con Write.
+// Para consultar se abre con Read, para actualizar, insertar o eliminar se abre con Write.
 
-/* pasos:
+/* Pasos a seguir:
 -Nombre de la base de datos.
--Definir la versión
+-Definir la versión.
 - Definir el contexto: public para que pueda ser utilizado en otras clases. Final porque una vez
 definido no va a cambiar.
 - Activar la base de datos con SQLiteDatabase.
@@ -97,7 +98,7 @@ public class NotaOperations {
                 titulo=cursor.getString(cursor.getColumnIndex("titulo"));
                 contenido=cursor.getString(cursor.getColumnIndex("contenido"));
 
-                consolidado=String.valueOf(id)+"-"+titulo;
+                consolidado=String.valueOf(id)+" -- "+titulo+" "+ "/ Contenido: "+ contenido;
                 list.add(consolidado);
             }while(cursor.moveToNext());
         }

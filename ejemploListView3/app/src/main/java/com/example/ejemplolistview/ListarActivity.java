@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.ejemplolistview.operations.NotaOperations;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.w3c.dom.Text;
@@ -22,6 +23,7 @@ public class ListarActivity extends AppCompatActivity {
 
     private NotaOperations operations;
     private ListView lv_titulo;
+    private FloatingActionButton flt_principal;
     private ArrayList<String> list;
     private ArrayAdapter<String> itemsAdapter;
     private Button btn_principal;
@@ -35,8 +37,10 @@ public class ListarActivity extends AppCompatActivity {
 
         operations=new NotaOperations(getApplicationContext());
 
+        // Se crea una lista de datos de acuerdo a la función definida en la clase NotaOperations.
         list=operations.list();
 
+        // se utiliza el adaptador propio de android para llevar la list a la vista que se encuentra en el layout.
         itemsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
         lv_titulo.setAdapter(itemsAdapter);
 
@@ -48,8 +52,7 @@ public class ListarActivity extends AppCompatActivity {
             }
         });
 
-
-        btn_principal.setOnClickListener(new View.OnClickListener() {
+        flt_principal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent principal=new Intent(ListarActivity.this,MainActivity.class);
@@ -60,8 +63,8 @@ public class ListarActivity extends AppCompatActivity {
     }
 
     public void init(){
-        btn_principal=findViewById(R.id.btn_principal);
         lv_titulo=findViewById(R.id.lv_titulo);
+        flt_principal=findViewById(R.id.flt_principal);
 
     }
 }

@@ -1,13 +1,12 @@
 package com.example.ejemplolistview.models;
 
-/*En este espacio se esta creando la clase para luego generar varios objetos
-de acuerdo a la necesidad de variables que deseo para insertar en la BD, para consultar,
-para actualizar o para eliminar.
+/*En la clase NotaModel se crea el modelo con la estructura de las variables que van a permitir la
+interacción con la base datos. En este caso insertar, extraer, modificar o eliminar.
  */
 
-//Seleccionar la variable, refactor, encapsulate field para generar los métodos get y set.
+//Par generar getter y setter se debe seleccionar la variable, clic derecho, refactor, encapsulate field y marcar las variables a las cuales se les van a generar los métodos.
 
-// Generar el método toString con Generate y toString()
+// Generar el método toString con Generate y toString().
 /* Generar tres constructores con Generate / Constructor. Un constructor vacío (select none),
     otro con título y contenido, y otro con las tres variables. Se seleccionan 3 para tener
     todas las opciones disponibles de acuerdo a las variables que quiere utilizar al inicializar
@@ -19,14 +18,17 @@ public class NotaModel {
     private String Titulo;
     private String Contenido;
 
+    //Constructor vacío
     public NotaModel() {
     }
 
+    //Constructor con dos variables
     public NotaModel(String titulo, String contenido) {
         Titulo = titulo;
         Contenido = contenido;
     }
 
+    //Constructor con todas las variables del modelo
     public NotaModel(int _id, String titulo, String contenido) {
         this._id = _id;
         Titulo = titulo;

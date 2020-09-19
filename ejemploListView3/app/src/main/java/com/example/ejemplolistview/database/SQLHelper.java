@@ -8,12 +8,12 @@ import androidx.annotation.Nullable;
 
 //El Helper es una clase que permite definir las rutinas para conectarse a la base de datos.
 //Se debe adicionar el extends para heredar del SQLite OpenHelper.
-// El OpenHelper es una clase abstracta. Esta clases no permiten crear objetos, son clases predefinidas con unas
-//rutinas para el determinar el comportamiento de sus clases hijas.
+// El SQLiteOpenHelper es una clase abstracta. Esta clases no tiene como función crear objetos, son clases predefinidas en el sistema con unas
+//rutinas para determinar el comportamiento de sus clases hijas.
 
 /*Procedimiento con clases abstractas:
 - En las ayudas se debe dar implement methods: onCreate, onUpgrade.
-- En las ayudas Create constructor matching super. Seleccionar de las opciones disponibles.
+- En las ayudas se debe  especificar create constructor matching super. Seleccionar de las opciones disponibles.
  */
 
 public class SQLHelper extends SQLiteOpenHelper {

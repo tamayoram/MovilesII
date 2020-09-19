@@ -28,9 +28,9 @@ public class MainActivity extends AppCompatActivity {
     private NotaModel model; //se llama el modelo para utilizarlo
     private NotaOperations operations; //se llama la clase NotaOperations para utilizarla
     private TextView tv_ejemplolista,tv_ejemploid,tv_ejemplotitulo,tv_ejemplocontenido; //se llama al textview que esta en la parte visual
-    private ArrayList<String> list;
-    private EditText edt_id,edt_titulo,edt_contenido;
-    private Button btn_insertar,btn_listar,btn_modificar,btn_eliminar;
+    private ArrayList<String> list; // se llama el objeto arraylist
+    private EditText edt_id,edt_titulo,edt_contenido; // se llaman los editText
+    private Button btn_insertar,btn_listar,btn_modificar,btn_eliminar; // se llaman los botones
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        init();
+        init(); //función definida en la parte de abajo para inicializar la conexión entre las vistas XML y el lenguaje java.
 
     operations=new NotaOperations(getApplicationContext()); //se genera un objeto para utilizar las funciones de NotaOperations
 
@@ -46,11 +46,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String titulo=edt_titulo.getText().toString();
-                String contenido=edt_contenido.getText().toString();
-                model=new NotaModel(titulo,contenido); //se inicializa un objeto correspondiente a la clase NotaModel
+                String titulo=edt_titulo.getText().toString(); // se obtiene el valor de título desde el formulario.
+                String contenido=edt_contenido.getText().toString(); // se obtiene el valor del contenido desde el formulario.
+                model=new NotaModel(titulo,contenido); //se inicializa el modelo para interactuar con la base de datos.
 
-                int validarinsert= operations.insert(model); // se define la variable r para verificar si se insertan los datos
+                int validarinsert= operations.insert(model); // se define la variable para verificar si se insertan los datos
                 if(validarinsert>0){
                     Toast.makeText(MainActivity.this,"Guardado correctamente",Toast.LENGTH_LONG).show();
 
@@ -60,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        //Rutinas correspondientes al botón modificar
 
         btn_modificar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
                 model=new NotaModel(id,titulo,contenido); //se inicializa un objeto correspondiente a la clase NotaModel
 
-                int validarupdate= operations.update(model); // se define la variable r para verificar si se insertan los datos
+                int validarupdate= operations.update(model); // se define la variable para verificar si se insertan los datos
                 if(validarupdate>0){
                     Toast.makeText(MainActivity.this,"Modificado correctamente",Toast.LENGTH_LONG).show();
 
@@ -82,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        //Rutina para pasar de este activity al activity donde se van a listar la información
         btn_listar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Rutinas para eliminar.
         btn_eliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+    //Función para conectar las vistar en XML del formularion y el lenguaje java.
 
     public void init(){
         edt_id=findViewById(R.id.edt_id);
