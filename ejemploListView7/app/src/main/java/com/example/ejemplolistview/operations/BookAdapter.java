@@ -53,13 +53,10 @@ public class BookAdapter extends BaseAdapter {
 
         TextView tv_book_titulo= convertView.findViewById(R.id.tv_book_titulo);
         TextView tv_book_descripcion= convertView.findViewById(R.id.tv_book_descripcion);
-        TextView tv_book_date= convertView.findViewById(R.id.tv_book_date);
         ImageView img_book= convertView.findViewById(R.id.img_book);
 
         tv_book_titulo.setText(getItem(position).getTitulo());
         tv_book_descripcion.setText(getItem(position).getContenido());
-        tv_book_date.setText("25/10/2020");
-
 
         // Colores
         String[] colores = {"#ff33b5e5", "#ffff8800", "#ff99cc00", "#ffff4444", "#ff0099cc", "#ff669900", "#ffaa66cc", "#ffffbb33"};

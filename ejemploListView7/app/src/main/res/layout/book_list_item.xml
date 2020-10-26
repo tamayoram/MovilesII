@@ -43,14 +43,6 @@
             android:layout_height="wrap_content"
             android:textSize="17sp"
             android:text="Descripción" />
-
-        <TextView
-            android:id="@+id/tv_book_date"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textSize="13sp"
-            android:layout_gravity="end"
-            android:text="Descripción" />
     </LinearLayout>
 
 

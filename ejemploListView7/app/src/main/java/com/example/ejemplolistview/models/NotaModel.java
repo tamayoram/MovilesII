@@ -13,9 +13,7 @@ interacción con la base datos. En este caso insertar, extraer, modificar o elim
     un objeto. Tres formas diferentes de crear objetos a partir de la misma clase.
  */
 
-import java.io.Serializable;
-
-public class NotaModel implements Serializable {
+public class NotaModel {
     private int _id;
     private String Titulo;
     private String Contenido;

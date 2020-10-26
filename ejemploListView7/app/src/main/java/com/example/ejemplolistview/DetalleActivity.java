@@ -31,13 +31,6 @@ public class DetalleActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         init();
 
-        model=(NotaModel) getIntent().getSerializableExtra("model");
-        if(model != null){
-            edt_detalleid.setText(model.get_id());
-            edt_detalletitulo.setText(model.getTitulo());
-            edt_detallecontenido.setText(model.getContenido());
-        }
-
         btn_detallelistar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

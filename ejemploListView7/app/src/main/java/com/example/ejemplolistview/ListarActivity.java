@@ -49,11 +49,8 @@ public class ListarActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                //model=list.get(position);
-                model=new NotaModel(list.get(position).get_id(),list.get(position).getTitulo(),list.get(position).getContenido());
                 Intent detalle=new Intent(ListarActivity.this,DetalleActivity.class);
                 startActivity(detalle);
-                detalle.putExtra("model",model);
 
             }
         });
