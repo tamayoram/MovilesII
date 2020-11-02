@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "405224602507",
+    "firebase_url": "https://fbooks-f5d50.firebaseio.com",
+    "project_id": "fbooks-f5d50",
+    "storage_bucket": "fbooks-f5d50.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:405224602507:android:42c4be2456dd6ce52ecd8e",
+        "android_client_info": {
+          "package_name": "com.example.fbooks"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "405224602507-hinq63n6vaa5v99vr27g92f41qim57gq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9ecWaZ1quGHmg0h_vP3Or8qgUn5lFd9c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "405224602507-hinq63n6vaa5v99vr27g92f41qim57gq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
