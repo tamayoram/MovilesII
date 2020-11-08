@@ -77,8 +77,8 @@ public class BaseActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    protected void goToCreate(){
-        Intent intent=new Intent(this,BaseActivity.class);
+    protected void goToNew(){
+        Intent intent=new Intent(this,NewActivity.class);
         startActivity(intent);
     }
 
