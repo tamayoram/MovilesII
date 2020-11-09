@@ -24,7 +24,7 @@ public class BaseActivity extends AppCompatActivity {
 
     protected BookModel model;
     protected ArrayList<BookModel> modelArrayList;
-   protected BookAdapter adapter;
+    protected BookAdapter adapter;
 
     protected FirebaseAuth mAuth;
     protected FirebaseStorage mFirebaseStorage;
@@ -73,7 +73,7 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     protected void goToList(){
-        Intent intent=new Intent(this,BaseActivity.class);
+        Intent intent=new Intent(this,ListActivity.class);
         startActivity(intent);
     }
 
