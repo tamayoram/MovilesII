@@ -16,7 +16,7 @@
 
         <ImageView
             android:id="@+id/iv_book_list_item_image"
-            android:layout_width="match_parent"
+            android:layout_width="60dp"
             android:layout_height="match_parent"
             app:srcCompat="@drawable/ic_library_books_black_18dp" />
     </LinearLayout>
@@ -26,7 +26,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_weight="0.8"
-        android:padding="10dp">
+        android:padding="20dp">
 
         <TextView
             android:id="@+id/tv_book_list_item_code"
