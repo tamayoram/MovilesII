@@ -1,22 +1,20 @@
 package com.example.fbooks;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.fbooks.adapters.BookAdapter;
 import com.example.fbooks.models.BookModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.view.View;
-import android.widget.ListView;
 
 import java.util.ArrayList;
 
@@ -39,6 +37,14 @@ public class ListActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 goToNew();
+            }
+        });
+
+        lv_list_books.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                model=modelArrayList.get(i);
+                makeSimpleAlertDialog("Open","Titulo: " + model.getTitle());
             }
         });
 
