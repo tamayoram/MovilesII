@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/InformationDetailFragment">
+
+    <fragment
+        android:id="@+id/InformationDetailFragment"
+        android:name="com.example.fbooks.InformationDetailFragment"
+        android:label="@string/first_fragment_label"
+        tools:layout="@layout/fragment_information_detail">
+
+        <action
+            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            app:destination="@id/ImgDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ImgDetailFragment"
+        android:name="com.example.fbooks.ImgDetailFragment"
+        android:label="@string/second_fragment_label"
+        tools:layout="@layout/fragment_img_detail">
+
+        <action
+            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/InformationDetailFragment" />
+    </fragment>
+</navigation>

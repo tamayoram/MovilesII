@@ -92,8 +92,9 @@ public class BaseActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    protected void goToDetail(){
-        Intent intent=new Intent(this,BaseActivity.class);
+    protected void goToDetail(BookModel model){
+        Intent intent=new Intent(this,DetailActivity.class);
+        intent.putExtra("model",model);
         startActivity(intent);
     }
 }
