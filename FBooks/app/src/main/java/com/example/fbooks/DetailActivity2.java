@@ -4,9 +4,13 @@ import android.os.Bundle;
 
 import com.example.fbooks.models.BookModel;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +18,8 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
 import android.widget.EditText;
+
+import java.util.Map;
 
 public class DetailActivity2 extends BaseActivity {
 
@@ -48,12 +54,14 @@ public class DetailActivity2 extends BaseActivity {
         et_detail2_description.setText(description);
 
 
-
         fb_detail2_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String code,title,description,id;
                 boolean available;
+
+                DocumentReference bookDocument = collectionReference.document();
+                id=bookDocument.getId();
 
                 code=et_detail2_code.getText().toString();
                 title=et_detail2_title.getText().toString();
@@ -62,9 +70,10 @@ public class DetailActivity2 extends BaseActivity {
                 if (code.isEmpty()||title.isEmpty()||description.isEmpty()){
                     makeSimpleAlertDialog("Information","Please check for empty fields");
                 }else{
-                    model=new BookModel();
+
+                    model = new BookModel();
                     model.setAvailable(true);
-                    
+                    model.setId(id);
                     model.setCode(code);
                     model.setTitle(title);
                     model.setDescription(description);
@@ -109,16 +118,7 @@ public class DetailActivity2 extends BaseActivity {
             collectionReference.document(model.getId()).set(model).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
-                    if(task.isSuccessful()){
-                        if(task.getResult() !=null){
-                            makeSimpleAlertDialog("Success","The book was updated");
-                        }else{
-                            makeSimpleAlertDialog("Warning","The book was not updated");
-                        }
-                    }else{
-                        makeSimpleAlertDialog("Error",task.getException().getMessage());
-                    }
-
+                    makeSimpleAlertDialog("Success","The book was updated");
                 }
             });
 
