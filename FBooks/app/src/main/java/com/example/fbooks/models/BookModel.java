@@ -1,5 +1,7 @@
 package com.example.fbooks.models;
 
+import com.google.firebase.firestore.DocumentReference;
+
 import java.io.Serializable;
 
 public class BookModel implements Serializable {

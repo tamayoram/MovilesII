@@ -76,7 +76,9 @@ public class NewActivity extends BaseActivity {
 
     private void save(BookModel model) {
         if(collectionReference!=null){
-            collectionReference.add(model)
+                collectionReference.add(model)
+                    //collectionReference.document().set(model)
+
                 .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentReference> task) {
@@ -96,6 +98,9 @@ public class NewActivity extends BaseActivity {
             makeSimpleAlertDialog("Error","Not database connection");
         }
     }
+
+    
+
 
     protected void init(){
         fb_new_save=findViewById(R.id.fb_new_save);

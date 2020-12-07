@@ -12,4 +12,5 @@
     <string name="title_activity_new">New Book</string>
     <string name="title_activity_list">Book List</string>
     <string name="title_activity_detail">DetailActivity</string>
+    <string name="title_activity_detail2">Book Detail</string>
 </resources>

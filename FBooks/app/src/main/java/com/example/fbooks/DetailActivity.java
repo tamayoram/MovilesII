@@ -28,7 +28,7 @@ public class DetailActivity extends BaseActivity {
         model= (BookModel) getIntent().getSerializableExtra("model");
         if(model !=null){
 
-            makeSimpleAlertDialog("Success","Model: "+ model.getCode());
+            //makeSimpleAlertDialog("Success","Model: "+ model.getCode());
             Bundle bundle=new Bundle();
             bundle.putSerializable("model",model);
             InformationDetailFragment.receivedInformation(bundle);

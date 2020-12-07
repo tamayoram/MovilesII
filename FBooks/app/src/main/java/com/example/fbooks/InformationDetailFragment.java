@@ -56,6 +56,6 @@ public class InformationDetailFragment extends Fragment {
            title=model.getTitle();
            description=model.getDescription();
        }
-
     }
+
 }
